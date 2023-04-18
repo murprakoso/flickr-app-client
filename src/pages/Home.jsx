@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Progress from '../components/nprogress/Progress';
 
 const Home = () => {
+  const [loading, setLoading] = React.useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
   return (
     <>
+      {' '}
+      <Progress isAnimating={loading} key={0} />
       <h1 className='mt-5'>Sticky footer with fixed navbar</h1>
       <p className='lead'>
         Pin a footer to the bottom of the viewport in desktop browsers with this
