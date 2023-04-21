@@ -19,6 +19,7 @@ const SingleImage = () => {
     };
 
     getInfo();
+    // eslint-disable-next-line
   }, []);
 
   return (

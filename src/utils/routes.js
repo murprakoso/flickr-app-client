@@ -6,6 +6,7 @@ import NotFound from "../pages/NotFound";
 import MainLayout from "../layouts/MainLayout";
 import SingleImage from "../pages/SingleImage";
 import Pictures from "../pages/Pictures";
+import Search from "../pages/Search";
 
 export default function Routes() {
   let element = useRoutes([
@@ -15,6 +16,7 @@ export default function Routes() {
         { path: "/", element: <Home /> },
         { path: "/pictures", element: <Pictures /> },
         { path: "/pictures/:photoId", element: <SingleImage /> },
+        { path: "/search", element: <Search /> },
         { path: "/about", element: <About /> },
         { path: "*", element: <NotFound /> },
       ],
