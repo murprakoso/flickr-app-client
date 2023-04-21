@@ -11,7 +11,7 @@ import { CodeSlash, Search } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [active, setActive] = useState('home');
+  const [active, setActive] = useState('');
 
   const handleSelect = (selectedKey) => {
     setActive(selectedKey);
