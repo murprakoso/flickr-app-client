@@ -1,26 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Progress from "../components/nprogress/Progress";
 import CardComponent from "../components/PictureCardComponent";
-import PaginationComponent from "../components/PaginationComponent";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import ReactPaginateComponent from "../components/ReactPaginateComponent";
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 const Pictures = () => {
   const [loading, setLoading] = React.useState(false);
-  const [photos, setPhotos] = React.useState([]);
+  const currentPage = useQuery().get("page") || 1;
+  const [pageNumber, setPageNumber] = useState(0);
+  const [data, setData] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
-    const getPhotos = async () => {
-      try {
-        const res = await axios.get(`http://localhost:4000/api/photos`);
-        setPhotos(res.data.data.photos);
-        // setPhotos([]);
-        setLoading(false);
-      } catch (err) {}
+    const fetchData = async () => {
+      const res = await axios.get(
+        `http://localhost:4000/api/photos?page=${pageNumber + 1}`
+      );
+      setData(res.data.data);
+      setLoading(false);
     };
-    getPhotos();
-  }, []);
+    fetchData();
+  }, [pageNumber]);
+
+  const handlePageClick = (data) => {
+    const selectedPage = data.selected;
+    setPageNumber(selectedPage);
+    navigate(`/pictures?page=${selectedPage + 1}`);
+  };
 
   return (
     <>
@@ -31,10 +45,14 @@ const Pictures = () => {
         <span className="sr-only">Loading... </span>
       ) : (
         <>
-          {photos.length !== 0 ? (
+          {data.photos?.length !== 0 ? (
             <>
-              <CardComponent photos={photos} />
-              <PaginationComponent />
+              <CardComponent photos={data.photos} />
+              <ReactPaginateComponent
+                pageCount={data.total}
+                onPageChange={handlePageClick}
+                forcePage={currentPage - 1}
+              />
             </>
           ) : (
             <Alert variant="danger" className="container-fluid" dismissible>

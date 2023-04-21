@@ -1,9 +1,9 @@
-import { BrowserRouter } from 'react-router-dom';
-import Routes from './utils/routes';
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./utils/routes";
 
 function App() {
   return (
-    <div className='app'>
+    <div className="app">
       <BrowserRouter>
         {/* <Navbar /> */}
         <Routes />
