@@ -16,7 +16,8 @@ const Header = () => {
     const handleSearch = (e) => {
         e.preventDefault()
         if (query !== '') {
-            navigate(`/search?q=${query.replace(/ /g, '+')}`)
+            // navigate(`/search?q=${query.replace(/ /g, '+')}`)
+            navigate(`/search?q=${query}`)
         }
     }
 

@@ -27,6 +27,7 @@ const Search = () => {
             try {
                 const res = await axios.get(`http://localhost:4000/api/search?tags=${query}&page=${pageNumber + 1}`)
                 setPhotos(res.data.data)
+                // setPhotos([])
                 setLoading(false)
             } catch (err) {}
         }
@@ -52,7 +53,7 @@ const Search = () => {
                 <span className="sr-only">Loading... </span>
             ) : (
                 <>
-                    {photos.length !== 0 ? (
+                    {photos.photos?.length !== 0 ? (
                         <>
                             <CardComponent photos={photos.photos} />
                             <ReactPaginateComponent
