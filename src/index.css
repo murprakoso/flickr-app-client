@@ -13,7 +13,7 @@ body {
     flex-direction: column !important;
 }
 
-main>.container {
+main > .container {
     padding: 60px 15px 0;
     margin-bottom: 30px;
 }
