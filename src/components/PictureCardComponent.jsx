@@ -1,29 +1,37 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import Masonry from 'react-masonry-css'
 import { Link } from 'react-router-dom'
 
-const FeedCardComponent = ({ photos }) => {
+const breakpoints = {
+    default: 5,
+    1024: 4,
+    900: 3,
+    768: 2,
+}
+
+const PictureCardComponent = ({ photos }) => {
     return (
         <>
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {photos &&
-                    photos.map((photo, i) => (
-                        <div className="col" key={i}>
-                            <Link to={`/pictures/${photo.id}`}>
-                                <Card className="text-white shadow-sm card__content">
-                                    <Card.Img src={photo.url} alt={photo.id} width={100} height={270} />
-                                    <Card.ImgOverlay className="card__img_overlay">
-                                        <Card.Title className="text-shadow" style={{ textShadow: '2px 2px 4px #000' }}>
-                                            {photo.title}
-                                        </Card.Title>
-                                    </Card.ImgOverlay>
-                                </Card>
-                            </Link>
-                        </div>
-                    ))}
-            </div>
+            <Masonry breakpointCols={breakpoints} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+                {/* */}
+                {photos?.map((photo, i) => (
+                    <div key={i} className="img__wrap">
+                        <Link to={`/pictures/${photo.id}`}>
+                            <img
+                                src={photo.url}
+                                alt={photo.i}
+                                style={{ objectFit: 'cover', objectPosition: 'center', width: '100%' }}
+                            />
+                            <div className="img__description">
+                                <p>{photo.title}</p>
+                                <p>{photo.owner}</p>
+                            </div>
+                        </Link>
+                    </div>
+                ))}
+            </Masonry>
         </>
     )
 }
 
-export default FeedCardComponent
+export default PictureCardComponent

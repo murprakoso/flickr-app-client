@@ -1,10 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Alert } from 'react-bootstrap'
-import CardComponent from '../components/PictureCardComponent'
 import Progress from '../components/nprogress/Progress'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ReactPaginateComponent from '../components/ReactPaginateComponent'
+import PictureCardComponent from '../components/PictureCardComponent'
 
 // query string
 const useQuery = () => {
@@ -55,7 +55,7 @@ const Search = () => {
                 <>
                     {photos.photos?.length !== 0 ? (
                         <>
-                            <CardComponent photos={photos.photos} />
+                            <PictureCardComponent photos={photos.photos} />
                             <ReactPaginateComponent
                                 pageCount={photos.total}
                                 onPageChange={handlePageClick}
