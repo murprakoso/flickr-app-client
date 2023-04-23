@@ -5,6 +5,7 @@ import Progress from '../components/nprogress/Progress'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ReactPaginateComponent from '../components/ReactPaginateComponent'
 import PictureCardComponent from '../components/PictureCardComponent'
+import { constants } from '../utils/constats'
 
 // query string
 const useQuery = () => {
@@ -25,7 +26,7 @@ const Search = () => {
         setLoading(true)
         const getPhotos = async () => {
             try {
-                const res = await axios.get(`http://localhost:4000/api/search?tags=${query}&page=${pageNumber + 1}`)
+                const res = await axios.get(`${constants.apiUrl}/api/search?tags=${query}&page=${pageNumber + 1}`)
                 setPhotos(res.data.data)
                 // setPhotos([])
                 setLoading(false)

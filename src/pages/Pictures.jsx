@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ReactPaginateComponent from '../components/ReactPaginateComponent'
 import PictureCardComponent from '../components/PictureCardComponent'
+import { constants } from '../utils/constats'
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search)
@@ -21,7 +22,7 @@ const Pictures = () => {
     useEffect(() => {
         setLoading(true)
         const fetchData = async () => {
-            const res = await axios.get(`http://localhost:4000/api/photos?page=${pageNumber + 1}`)
+            const res = await axios.get(`${constants.apiUrl}/api/photos?page=${pageNumber + 1}`)
             setData(res.data.data)
             setLoading(false)
         }

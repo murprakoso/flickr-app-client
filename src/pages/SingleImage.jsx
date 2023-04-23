@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Progress from '../components/nprogress/Progress'
+import { constants } from '../utils/constats'
 
 const SingleImage = () => {
     const [loading, setLoading] = useState(false)
@@ -11,7 +12,7 @@ const SingleImage = () => {
     useEffect(() => {
         setLoading(true)
         const getInfo = async () => {
-            const res = await axios.get(`http://localhost:4000/api/photos/${photoId}`)
+            const res = await axios.get(`${constants.apiUrl}/api/photos/${photoId}`)
             setInfo(res.data.data)
             setLoading(false)
         }
