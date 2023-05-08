@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Progress from '../components/nprogress/Progress'
 import { Alert } from 'react-bootstrap'
-import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ReactPaginateComponent from '../components/ReactPaginateComponent'
 import PictureCardComponent from '../components/PictureCardComponent'
-import { constants } from '../utils/constats'
+import { getPhotos } from '../utils/api'
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search)
@@ -22,8 +21,8 @@ const Pictures = () => {
     useEffect(() => {
         setLoading(true)
         const fetchData = async () => {
-            const res = await axios.get(`${constants.apiUrl}/api/photos?page=${pageNumber + 1}`)
-            setData(res.data.data)
+            const response = await getPhotos(pageNumber + 1)
+            setData(response)
             setLoading(false)
         }
         fetchData()

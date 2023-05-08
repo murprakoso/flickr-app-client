@@ -1,11 +1,10 @@
-import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Alert } from 'react-bootstrap'
 import Progress from '../components/nprogress/Progress'
 import Masonry from 'react-masonry-css'
 import { FullscreenExit } from 'react-bootstrap-icons'
 import './Home.css'
-import { constants } from '../utils/constats'
+import { getFeeds } from '../utils/api'
 
 const Home = () => {
     const [loading, setLoading] = useState(false)
@@ -15,8 +14,8 @@ const Home = () => {
         setLoading(true)
         const getPhotos = async () => {
             try {
-                const res = await axios.get(`${constants.apiUrl}/api/feeds`)
-                setPhotos(res.data.data)
+                const response = await getFeeds()
+                setPhotos(response)
                 setLoading(false)
             } catch (err) {}
         }
